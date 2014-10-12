@@ -1,0 +1,7 @@
+c:\users\aribilgi\documents\visual studio 2012\Projects\OgrenciOtom\OgrenciOtom\bin\OgrenciOtom.dll
+c:\users\aribilgi\documents\visual studio 2012\Projects\OgrenciOtom\OgrenciOtom\bin\OgrenciOtom.pdb
+c:\users\aribilgi\documents\visual studio 2012\Projects\OgrenciOtom\OgrenciOtom\obj\Debug\OgrenciOtom.csprojResolveAssemblyReference.cache
+c:\users\aribilgi\documents\visual studio 2012\Projects\OgrenciOtom\OgrenciOtom\obj\Debug\OgrenciOtom.dll
+c:\users\aribilgi\documents\visual studio 2012\Projects\OgrenciOtom\OgrenciOtom\obj\Debug\OgrenciOtom.pdb
+c:\users\aribilgi\documents\visual studio 2012\Projects\OgrenciOtom\OgrenciOtom\bin\EntityFramework.dll
+c:\users\aribilgi\documents\visual studio 2012\Projects\OgrenciOtom\OgrenciOtom\bin\EntityFramework.xml
