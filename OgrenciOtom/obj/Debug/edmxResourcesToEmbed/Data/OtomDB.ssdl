@@ -1,8 +1,20 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="DersOtomDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityContainer Name="DersOtomDBModelStoreContainer">
+    <EntitySet Name="Classrooms" EntityType="DersOtomDBModel.Store.Classrooms" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Students" EntityType="DersOtomDBModel.Store.Students" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Students_Classrooms" Association="DersOtomDBModel.Store.FK_Students_Classrooms">
+      <End Role="Classrooms" EntitySet="Classrooms" />
+      <End Role="Students" EntitySet="Students" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Classrooms">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ClassName" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
   <EntityType Name="Students">
     <Key>
       <PropertyRef Name="Id" />
@@ -14,4 +26,16 @@
     <Property Name="DateOfBirth" Type="date" Nullable="false" />
     <Property Name="ClassId" Type="int" Nullable="false" />
   </EntityType>
+  <Association Name="FK_Students_Classrooms">
+    <End Role="Classrooms" Type="DersOtomDBModel.Store.Classrooms" Multiplicity="1" />
+    <End Role="Students" Type="DersOtomDBModel.Store.Students" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Classrooms">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Students">
+        <PropertyRef Name="ClassId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

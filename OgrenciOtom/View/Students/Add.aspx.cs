@@ -31,6 +31,17 @@ namespace OgrenciOtom.View.Students
             db.Students.Add(s);
             db.SaveChanges();
 
+            /*
+            // Select sorgusu
+            Student s2 = db.Students.Where(st => st.Id == 1).FirstOrDefault();
+
+            // Update
+            db.SaveChanges();
+
+            // Delete
+            db.Students.Remove(s2);
+            db.SaveChanges();
+            */
             Response.Redirect("/index.aspx");
 
 

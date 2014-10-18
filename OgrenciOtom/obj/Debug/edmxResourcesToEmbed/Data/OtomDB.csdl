@@ -2,6 +2,11 @@
 <Schema Namespace="DersOtomDBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="OtomDBEntities" p1:LazyLoadingEnabled="true">
     <EntitySet Name="Students" EntityType="DersOtomDBModel.Student" />
+    <EntitySet Name="Classrooms" EntityType="DersOtomDBModel.Classroom" />
+    <AssociationSet Name="FK_Students_Classrooms" Association="DersOtomDBModel.FK_Students_Classrooms">
+      <End Role="Classroom" EntitySet="Classrooms" />
+      <End Role="Student" EntitySet="Students" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Student">
     <Key>
@@ -13,5 +18,26 @@
     <Property Name="Gender" Type="Int32" Nullable="false" />
     <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="ClassId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Classroom" Relationship="DersOtomDBModel.FK_Students_Classrooms" FromRole="Student" ToRole="Classroom" />
   </EntityType>
+  <EntityType Name="Classroom">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="ClassName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Students" Relationship="DersOtomDBModel.FK_Students_Classrooms" FromRole="Classroom" ToRole="Student" />
+  </EntityType>
+  <Association Name="FK_Students_Classrooms">
+    <End Type="DersOtomDBModel.Classroom" Role="Classroom" Multiplicity="1" />
+    <End Type="DersOtomDBModel.Student" Role="Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Classroom">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Student">
+        <PropertyRef Name="ClassId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

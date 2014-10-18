@@ -72,6 +72,7 @@
     <Content Include="Scripts\js\bootstrap.min.js" />
     <Content Include="Scripts\js\jquery-2.1.1.min.js" />
     <Content Include="View\Students\Add.aspx" />
+    <Content Include="View\Students\List.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -81,6 +82,9 @@
     </Compile>
     <Compile Include="BootStrap.Master.designer.cs">
       <DependentUpon>BootStrap.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Data\Classroom.cs">
+      <DependentUpon>OtomDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Data\OtomDB.Context.cs">
       <AutoGen>True</AutoGen>
@@ -114,6 +118,13 @@
     </Compile>
     <Compile Include="View\Students\Add.aspx.designer.cs">
       <DependentUpon>Add.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="View\Students\List.aspx.cs">
+      <DependentUpon>List.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="View\Students\List.aspx.designer.cs">
+      <DependentUpon>List.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
