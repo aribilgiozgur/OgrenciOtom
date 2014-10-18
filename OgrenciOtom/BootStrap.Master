@@ -30,10 +30,22 @@
           <ul class="nav navbar-nav">
               
             <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Öğrenci <span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Öğrenci İşlemleri<span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="/View/Students/Add.aspx">Ekle</a></li>
                 <li><a href="/View/Students/List.aspx">Listele</a></li>                
+              </ul></li>
+                 <li class="dropdown">
+                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sınıf İşlemleri <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="/View/Classrooms/Add.aspx">Ekle</a></li>
+                <li><a href="/View/Classrooms/List.aspx">Listele</a></li>                
+              </ul></li>
+                      <li class="dropdown">
+                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ders İşlemleri <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><a href="/View/Courses/Add.aspx">Ekle</a></li>
+                <li><a href="/View/Courses/List.aspx">Listele</a></li>                
               </ul>
             </li>
           </ul>

@@ -5,3 +5,10 @@ c:\users\aribilgi\documents\visual studio 2012\Projects\OgrenciOtom\OgrenciOtom\
 c:\users\aribilgi\documents\visual studio 2012\Projects\OgrenciOtom\OgrenciOtom\obj\Debug\OgrenciOtom.pdb
 c:\users\aribilgi\documents\visual studio 2012\Projects\OgrenciOtom\OgrenciOtom\bin\EntityFramework.dll
 c:\users\aribilgi\documents\visual studio 2012\Projects\OgrenciOtom\OgrenciOtom\bin\EntityFramework.xml
+C:\Users\ARIBİLGİ\Documents\GitHub\OgrenciOtom\OgrenciOtom\bin\OgrenciOtom.dll
+C:\Users\ARIBİLGİ\Documents\GitHub\OgrenciOtom\OgrenciOtom\bin\OgrenciOtom.pdb
+C:\Users\ARIBİLGİ\Documents\GitHub\OgrenciOtom\OgrenciOtom\bin\EntityFramework.dll
+C:\Users\ARIBİLGİ\Documents\GitHub\OgrenciOtom\OgrenciOtom\bin\EntityFramework.xml
+C:\Users\ARIBİLGİ\Documents\GitHub\OgrenciOtom\OgrenciOtom\obj\Debug\OgrenciOtom.csprojResolveAssemblyReference.cache
+C:\Users\ARIBİLGİ\Documents\GitHub\OgrenciOtom\OgrenciOtom\obj\Debug\OgrenciOtom.dll
+C:\Users\ARIBİLGİ\Documents\GitHub\OgrenciOtom\OgrenciOtom\obj\Debug\OgrenciOtom.pdb

@@ -6,6 +6,8 @@
     <edmx:Diagrams>
       <Diagram DiagramId="064e137f07bb44d783a3fbb1a783e01a" Name="Diagram1">
         <EntityTypeShape EntityType="DersOtomDBModel.Student" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DersOtomDBModel.ClassRoom" Width="1.5" PointX="4.9229650185084743" PointY="10.048972372919774" />
+        <AssociationConnector Association="DersOtomDBModel.FK_Students_ClassRooms" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
