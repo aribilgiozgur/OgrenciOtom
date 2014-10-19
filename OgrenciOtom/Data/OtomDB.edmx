@@ -4,57 +4,119 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="DersOtomDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityContainer Name="DersOtomDBModelStoreContainer">
-          <EntitySet Name="Classrooms" EntityType="DersOtomDBModel.Store.Classrooms" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Students" EntityType="DersOtomDBModel.Store.Students" store:Type="Tables" Schema="dbo" />
-          <AssociationSet Name="FK_Students_Classrooms" Association="DersOtomDBModel.Store.FK_Students_Classrooms">
+    <Schema Namespace="OtomDBModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="OtomDBModelStoreContainer">
+    <EntitySet Name="Classrooms" EntityType="OtomDBModel.Store.Classrooms" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Students" EntityType="OtomDBModel.Store.Students" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Courses" EntityType="OtomDBModel.Store.Courses" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CourseStudent" EntityType="OtomDBModel.Store.CourseStudent" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_Students_Classrooms" Association="OtomDBModel.Store.FK_Students_Classrooms">
+      <End Role="Classrooms" EntitySet="Classrooms" />
+      <End Role="Students" EntitySet="Students" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CourseStudent_Course" Association="OtomDBModel.Store.FK_CourseStudent_Course">
+      <End Role="Course" EntitySet="Courses" />
+      <End Role="CourseStudent" EntitySet="CourseStudent" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CourseStudent_Student" Association="OtomDBModel.Store.FK_CourseStudent_Student">
+      <End Role="Student" EntitySet="Students" />
+      <End Role="CourseStudent" EntitySet="CourseStudent" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Classrooms">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ClassName" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Students">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" Nullable="false" MaxLength="150" />
+    <Property Name="LastName" Type="varchar" Nullable="false" MaxLength="150" />
+    <Property Name="Gender" Type="int" Nullable="false" />
+    <Property Name="DateOfBirth" Type="datetime" Nullable="false" />
+    <Property Name="ClassId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Courses">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CourseName" Type="varchar" Nullable="true" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="CourseStudent">
+    <Key>
+      <PropertyRef Name="Courses_Id" />
+      <PropertyRef Name="Students_Id" />
+    </Key>
+    <Property Name="Courses_Id" Type="int" Nullable="false" />
+    <Property Name="Students_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Students_Classrooms">
+    <End Role="Classrooms" Type="OtomDBModel.Store.Classrooms" Multiplicity="1" />
+    <End Role="Students" Type="OtomDBModel.Store.Students" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Classrooms">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Students">
+        <PropertyRef Name="ClassId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CourseStudent_Course">
+    <End Role="Course" Type="OtomDBModel.Store.Courses" Multiplicity="1" />
+    <End Role="CourseStudent" Type="OtomDBModel.Store.CourseStudent" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Course">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CourseStudent">
+        <PropertyRef Name="Courses_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CourseStudent_Student">
+    <End Role="CourseStudent" Type="OtomDBModel.Store.CourseStudent" Multiplicity="*" />
+    <End Role="Student" Type="OtomDBModel.Store.Students" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Student">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CourseStudent">
+        <PropertyRef Name="Students_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OtomDBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="OtomDBEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Classrooms" EntityType="OtomDBModel.Classroom" />
+          <EntitySet Name="Students" EntityType="OtomDBModel.Student" />
+          <AssociationSet Name="FK_Students_Classrooms" Association="OtomDBModel.FK_Students_Classrooms">
             <End Role="Classrooms" EntitySet="Classrooms" />
             <End Role="Students" EntitySet="Students" />
           </AssociationSet>
-        </EntityContainer>
-        <EntityType Name="Classrooms">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="ClassName" Type="varchar" Nullable="false" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="Students">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
-          <Property Name="FirstName" Type="varchar" Nullable="false" MaxLength="150" />
-          <Property Name="LastName" Type="varchar" Nullable="false" MaxLength="150" />
-          <Property Name="Gender" Type="int" Nullable="false" />
-          <Property Name="DateOfBirth" Type="date" Nullable="false" />
-          <Property Name="ClassId" Type="int" Nullable="false" />
-        </EntityType>
-        <Association Name="FK_Students_Classrooms">
-          <End Role="Classrooms" Type="DersOtomDBModel.Store.Classrooms" Multiplicity="1" />
-          <End Role="Students" Type="DersOtomDBModel.Store.Students" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Classrooms">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Students">
-              <PropertyRef Name="ClassId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-      </Schema></edmx:StorageModels>
-    <!-- CSDL content -->
-    <edmx:ConceptualModels>
-      <Schema Namespace="DersOtomDBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="OtomDBEntities" p1:LazyLoadingEnabled="true">
-          <EntitySet Name="Students" EntityType="DersOtomDBModel.Student" />
-          <EntitySet Name="Classrooms" EntityType="DersOtomDBModel.Classroom" />
-          <AssociationSet Name="FK_Students_Classrooms" Association="DersOtomDBModel.FK_Students_Classrooms">
-            <End Role="Classroom" EntitySet="Classrooms" />
+          <EntitySet Name="Courses" EntityType="OtomDBModel.Course" />
+          <AssociationSet Name="CourseStudent" Association="OtomDBModel.CourseStudent">
+            <End Role="Course" EntitySet="Courses" />
             <End Role="Student" EntitySet="Students" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Classroom">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+          <Property Name="ClassName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Students" Relationship="OtomDBModel.FK_Students_Classrooms" FromRole="Classrooms" ToRole="Students" />
+        </EntityType>
         <EntityType Name="Student">
           <Key>
             <PropertyRef Name="Id" />
@@ -65,57 +127,77 @@
           <Property Name="Gender" Type="Int32" Nullable="false" />
           <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="ClassId" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Classroom" Relationship="DersOtomDBModel.FK_Students_Classrooms" FromRole="Student" ToRole="Classroom" />
+          <NavigationProperty Name="Classroom" Relationship="OtomDBModel.FK_Students_Classrooms" FromRole="Students" ToRole="Classrooms" />
+          <NavigationProperty Name="Courses" Relationship="OtomDBModel.CourseStudent" FromRole="Student" ToRole="Course" />
         </EntityType>
-        <EntityType Name="Classroom">
+        <Association Name="FK_Students_Classrooms">
+          <End Role="Classrooms" Type="OtomDBModel.Classroom" Multiplicity="1" />
+          <End Role="Students" Type="OtomDBModel.Student" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Classrooms">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Students">
+              <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Course">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
           <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="ClassName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="Students" Relationship="DersOtomDBModel.FK_Students_Classrooms" FromRole="Classroom" ToRole="Student" />
+          <Property Type="String" Name="CourseName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Students" Relationship="OtomDBModel.CourseStudent" FromRole="Course" ToRole="Student" />
         </EntityType>
-        <Association Name="FK_Students_Classrooms">
-          <End Type="DersOtomDBModel.Classroom" Role="Classroom" Multiplicity="1" />
-          <End Type="DersOtomDBModel.Student" Role="Student" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Classroom">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="Student">
-              <PropertyRef Name="ClassId" />
-            </Dependent>
-          </ReferentialConstraint>
+        <Association Name="CourseStudent">
+          <End Type="OtomDBModel.Course" Role="Course" Multiplicity="*" />
+          <End Type="OtomDBModel.Student" Role="Student" Multiplicity="*" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="DersOtomDBModelStoreContainer" CdmEntityContainer="OtomDBEntities">
-          <EntitySetMapping Name="Students">
-            <EntityTypeMapping TypeName="DersOtomDBModel.Student">
-              <MappingFragment StoreEntitySet="Students">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
-                <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
-                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
-                <ScalarProperty Name="ClassId" ColumnName="ClassId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Classrooms">
-            <EntityTypeMapping TypeName="DersOtomDBModel.Classroom">
-              <MappingFragment StoreEntitySet="Classrooms">
-                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="OtomDBModelStoreContainer" CdmEntityContainer="OtomDBEntities">
+    <EntitySetMapping Name="Classrooms">
+      <EntityTypeMapping TypeName="IsTypeOf(OtomDBModel.Classroom)">
+        <MappingFragment StoreEntitySet="Classrooms">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Students">
+      <EntityTypeMapping TypeName="IsTypeOf(OtomDBModel.Student)">
+        <MappingFragment StoreEntitySet="Students">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+          <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Courses">
+      <EntityTypeMapping TypeName="IsTypeOf(OtomDBModel.Course)">
+        <MappingFragment StoreEntitySet="Courses">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="CourseStudent" TypeName="OtomDBModel.CourseStudent" StoreEntitySet="CourseStudent">
+      <EndProperty Name="Course">
+        <ScalarProperty Name="Id" ColumnName="Courses_Id" />
+      </EndProperty>
+      <EndProperty Name="Student">
+        <ScalarProperty Name="Id" ColumnName="Students_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">

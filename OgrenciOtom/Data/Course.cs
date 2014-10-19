@@ -12,21 +12,16 @@ namespace OgrenciOtom.Data
     using System;
     using System.Collections.Generic;
     
-    public partial class Student
+    public partial class Course
     {
-        public Student()
+        public Course()
         {
-            this.Courses = new HashSet<Course>();
+            this.Students = new HashSet<Student>();
         }
     
         public int Id { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public int Gender { get; set; }
-        public System.DateTime DateOfBirth { get; set; }
-        public int ClassId { get; set; }
+        public string CourseName { get; set; }
     
-        public virtual Classroom Classroom { get; set; }
-        public virtual ICollection<Course> Courses { get; set; }
+        public virtual ICollection<Student> Students { get; set; }
     }
 }

@@ -25,6 +25,8 @@ namespace OgrenciOtom.Data
             throw new UnintentionalCodeFirstException();
         }
     
+        public DbSet<Classroom> Classrooms { get; set; }
         public DbSet<Student> Students { get; set; }
+        public DbSet<Course> Courses { get; set; }
     }
 }

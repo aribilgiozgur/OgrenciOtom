@@ -1,13 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="DersOtomDBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+<Schema Namespace="OtomDBModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="OtomDBEntities" p1:LazyLoadingEnabled="true">
-    <EntitySet Name="Students" EntityType="DersOtomDBModel.Student" />
-    <EntitySet Name="Classrooms" EntityType="DersOtomDBModel.Classroom" />
-    <AssociationSet Name="FK_Students_Classrooms" Association="DersOtomDBModel.FK_Students_Classrooms">
-      <End Role="Classroom" EntitySet="Classrooms" />
+    <EntitySet Name="Classrooms" EntityType="OtomDBModel.Classroom" />
+    <EntitySet Name="Students" EntityType="OtomDBModel.Student" />
+    <AssociationSet Name="FK_Students_Classrooms" Association="OtomDBModel.FK_Students_Classrooms">
+      <End Role="Classrooms" EntitySet="Classrooms" />
+      <End Role="Students" EntitySet="Students" />
+    </AssociationSet>
+    <EntitySet Name="Courses" EntityType="OtomDBModel.Course" />
+    <AssociationSet Name="CourseStudent" Association="OtomDBModel.CourseStudent">
+      <End Role="Course" EntitySet="Courses" />
       <End Role="Student" EntitySet="Students" />
     </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Classroom">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ClassName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="Students" Relationship="OtomDBModel.FK_Students_Classrooms" FromRole="Classrooms" ToRole="Students" />
+  </EntityType>
   <EntityType Name="Student">
     <Key>
       <PropertyRef Name="Id" />
@@ -18,26 +31,31 @@
     <Property Name="Gender" Type="Int32" Nullable="false" />
     <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="ClassId" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Classroom" Relationship="DersOtomDBModel.FK_Students_Classrooms" FromRole="Student" ToRole="Classroom" />
+    <NavigationProperty Name="Classroom" Relationship="OtomDBModel.FK_Students_Classrooms" FromRole="Students" ToRole="Classrooms" />
+    <NavigationProperty Name="Courses" Relationship="OtomDBModel.CourseStudent" FromRole="Student" ToRole="Course" />
   </EntityType>
-  <EntityType Name="Classroom">
+  <Association Name="FK_Students_Classrooms">
+    <End Role="Classrooms" Type="OtomDBModel.Classroom" Multiplicity="1" />
+    <End Role="Students" Type="OtomDBModel.Student" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Classrooms">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Students">
+        <PropertyRef Name="ClassId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Course">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="String" Name="ClassName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="Students" Relationship="DersOtomDBModel.FK_Students_Classrooms" FromRole="Classroom" ToRole="Student" />
+    <Property Type="String" Name="CourseName" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Students" Relationship="OtomDBModel.CourseStudent" FromRole="Course" ToRole="Student" />
   </EntityType>
-  <Association Name="FK_Students_Classrooms">
-    <End Type="DersOtomDBModel.Classroom" Role="Classroom" Multiplicity="1" />
-    <End Type="DersOtomDBModel.Student" Role="Student" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Classroom">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Student">
-        <PropertyRef Name="ClassId" />
-      </Dependent>
-    </ReferentialConstraint>
+  <Association Name="CourseStudent">
+    <End Type="OtomDBModel.Course" Role="Course" Multiplicity="*" />
+    <End Type="OtomDBModel.Student" Role="Student" Multiplicity="*" />
   </Association>
 </Schema>

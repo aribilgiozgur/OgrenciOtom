@@ -28,6 +28,7 @@ namespace OgrenciOtom.View.Students
             String yil = txtYil.Text;
             DateTime BirthDate = DateTime.Parse(gun+"-"+ay+"-"+yil);
             s.DateOfBirth = BirthDate;
+            s.ClassId = 1;            
             db.Students.Add(s);
             db.SaveChanges();
 

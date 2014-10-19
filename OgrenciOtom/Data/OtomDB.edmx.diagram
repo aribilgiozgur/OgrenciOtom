@@ -4,10 +4,12 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="064e137f07bb44d783a3fbb1a783e01a" Name="Diagram1">
-        <EntityTypeShape EntityType="DersOtomDBModel.Student" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="DersOtomDBModel.Classroom" Width="1.5" PointX="5.8538024396886126" PointY="2.9675619317998931" />
-        <AssociationConnector Association="DersOtomDBModel.FK_Students_Classrooms" />
+      <Diagram DiagramId="279480bdde534e228a6847e84b22534f" Name="Diagram1" ZoomLevel="94">
+        <EntityTypeShape EntityType="OtomDBModel.Classroom" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OtomDBModel.Student" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="OtomDBModel.FK_Students_Classrooms" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="OtomDBModel.Course" Width="1.5" PointX="6.625" PointY="1.25" />
+        <AssociationConnector Association="OtomDBModel.CourseStudent" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

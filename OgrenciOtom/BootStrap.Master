@@ -49,7 +49,7 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ders İşlemleri<span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="/View/Courses/Add.aspx">Ekle</a></li>
-                <li><a href="/View/Courses/List.aspx">Listele</a></li>                
+                <li><a href="/View/Courses/AddStudentsToCourse.aspx">Derse Öğrenci Ekle</a></li>                
               </ul>
             </li>
           </ul>

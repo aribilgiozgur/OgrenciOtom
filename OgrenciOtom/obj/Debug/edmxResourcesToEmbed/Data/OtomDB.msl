@@ -1,8 +1,16 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="DersOtomDBModelStoreContainer" CdmEntityContainer="OtomDBEntities">
+  <EntityContainerMapping StorageEntityContainer="OtomDBModelStoreContainer" CdmEntityContainer="OtomDBEntities">
+    <EntitySetMapping Name="Classrooms">
+      <EntityTypeMapping TypeName="IsTypeOf(OtomDBModel.Classroom)">
+        <MappingFragment StoreEntitySet="Classrooms">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Students">
-      <EntityTypeMapping TypeName="DersOtomDBModel.Student">
+      <EntityTypeMapping TypeName="IsTypeOf(OtomDBModel.Student)">
         <MappingFragment StoreEntitySet="Students">
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="FirstName" ColumnName="FirstName" />
@@ -13,13 +21,21 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="Classrooms">
-      <EntityTypeMapping TypeName="DersOtomDBModel.Classroom">
-        <MappingFragment StoreEntitySet="Classrooms">
-          <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+    <EntitySetMapping Name="Courses">
+      <EntityTypeMapping TypeName="IsTypeOf(OtomDBModel.Course)">
+        <MappingFragment StoreEntitySet="Courses">
           <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="CourseName" ColumnName="CourseName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <AssociationSetMapping Name="CourseStudent" TypeName="OtomDBModel.CourseStudent" StoreEntitySet="CourseStudent">
+      <EndProperty Name="Course">
+        <ScalarProperty Name="Id" ColumnName="Courses_Id" />
+      </EndProperty>
+      <EndProperty Name="Student">
+        <ScalarProperty Name="Id" ColumnName="Students_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>
