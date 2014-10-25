@@ -67,6 +67,15 @@ namespace OgrenciOtom.View.Students {
         protected global::System.Web.UI.WebControls.TextBox txtYil;
         
         /// <summary>
+        /// drpClassrooms control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpClassrooms;
+        
+        /// <summary>
         /// lnkSend control.
         /// </summary>
         /// <remarks>

@@ -20,7 +20,7 @@ namespace OgrenciOtom.View.Courses
                 drpCourses.DataBind();
 
 
-                chkStudents.DataSource = db.Students.ToList();
+                chkStudents.DataSource = db.Students.ToList();                    
                 chkStudents.DataTextField = "FirstName";
                 chkStudents.DataValueField = "Id";
                 chkStudents.DataBind();
@@ -38,11 +38,12 @@ namespace OgrenciOtom.View.Courses
                 int studentId = int.Parse(selectedStudents[i]);
                 Student s = db.Students.Where(s1 => s1.Id == studentId).SingleOrDefault();
                 students.Add(s);
-            }
+            }            
             c.Students = students;
 
             db.SaveChanges();
+            Response.Redirect("/index.aspx");
 
-        }
+        }        
     }
 }

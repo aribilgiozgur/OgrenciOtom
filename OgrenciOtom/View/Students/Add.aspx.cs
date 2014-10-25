@@ -13,7 +13,13 @@ namespace OgrenciOtom.View.Students
         OtomDBEntities db = new OtomDBEntities();
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                drpClassrooms.DataSource = db.Classrooms.ToList();
+                drpClassrooms.DataTextField = "ClassName";
+                drpClassrooms.DataValueField = "Id";
+                drpClassrooms.DataBind();
+            }
         }
 
         protected void lnkSend_Click(object sender, EventArgs e)
@@ -28,7 +34,10 @@ namespace OgrenciOtom.View.Students
             String yil = txtYil.Text;
             DateTime BirthDate = DateTime.Parse(gun+"-"+ay+"-"+yil);
             s.DateOfBirth = BirthDate;
-            s.ClassId = 1;            
+
+            int classId = int.Parse(drpClassrooms.SelectedValue);
+            s.ClassId = classId;            
+            
             db.Students.Add(s);
             db.SaveChanges();
 

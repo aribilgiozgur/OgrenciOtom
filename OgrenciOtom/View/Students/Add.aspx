@@ -53,6 +53,12 @@
                  <asp:TextBox ID="txtYil" runat="server" CssClass="form-control"></asp:TextBox>
                 </td>
             </tr>
+            <tr>
+                <td>Sınıfı</td>
+                    <td colspan="3">
+                        <asp:DropDownList runat="server" ID="drpClassrooms" CssClass="form-control"></asp:DropDownList>
+                    </td>
+            </tr>
 
             <tr>
                 <td colspan="4">
